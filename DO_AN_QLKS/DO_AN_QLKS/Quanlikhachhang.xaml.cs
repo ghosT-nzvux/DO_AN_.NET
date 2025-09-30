@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.ComponentModel;
-using System.Data.Entity;   // EF6
+using System.Data.Entity; 
 
 namespace DO_AN_QLKS
 {
