@@ -1,0 +1,77 @@
+﻿<Window x:Class="DO_AN_QLKS.TinhDichVu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Tính dịch vụ" Height="560" Width="840"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False" ResizeMode="CanMinimize">
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                <Button x:Name="btnAddRow" Content="Thêm dòng" Padding="12,6" Margin="0,0,8,0"/>
+                <Button x:Name="btnRemoveRow" Content="Xóa dòng" Padding="12,6"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                <TextBox x:Name="txtSearch" Width="220" Margin="8,0,0,0" 
+                 ToolTip="Tìm theo tên dịch vụ..." />
+                <Button x:Name="btnSearch" Content="Tìm" Padding="10,6" Margin="6,0,0,0"/>
+                <Button x:Name="btnClearSearch" Content="Xóa lọc" Padding="10,6" Margin="6,0,0,0"/>
+            </StackPanel>
+        </DockPanel>
+
+        <DataGrid x:Name="dgBillItems" Grid.Row="1" Margin="0,8,0,8"
+              AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"
+              IsReadOnly="False" SelectionMode="Single" SelectionUnit="FullRow">
+            <DataGrid.Columns>
+                <DataGridComboBoxColumn Header="Dịch vụ" Width="2*"
+                                SelectedValueBinding="{Binding DichVuId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedValuePath="DichVuId"
+                                DisplayMemberPath="TenDichVu">
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding DataContext.ServiceView, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                            <Setter Property="IsReadOnly" Value="True"/>
+                            <Setter Property="IsHitTestVisible" Value="False"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding DataContext.ServiceView, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                            <Setter Property="IsEditable" Value="True"/>
+                            <Setter Property="IsTextSearchEnabled" Value="True"/>
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                </DataGridComboBoxColumn>
+
+                <DataGridTextColumn Header="Đơn vị"  Binding="{Binding Unit}"      IsReadOnly="True" Width="0.7*"/>
+                <DataGridTextColumn Header="Đơn giá" Binding="{Binding UnitPrice}" IsReadOnly="True" Width="0.9*"/>
+                <DataGridTextColumn Header="SL"      Binding="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" Width="0.6*"/>
+                <DataGridTextColumn Header="Thành tiền" Binding="{Binding Amount}" IsReadOnly="True" Width="1*"/>
+                <DataGridTextColumn Header="Ghi chú" Binding="{Binding Notes}" Width="1.4*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Grid Grid.Row="2" Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="260"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Tổng dịch vụ:" VerticalAlignment="Center"
+                 HorizontalAlignment="Right" FontWeight="Bold" Margin="0,0,8,0"/>
+            <TextBox x:Name="txtServicesTotal" Grid.Column="1"
+               IsReadOnly="True" TextAlignment="Right" FontWeight="Bold"/>
+        </Grid>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="btnOK" Content="Lưu" Padding="14,6"/>
+            <Button x:Name="btnCancel" Content="Hủy" Padding="14,6" Margin="8,0,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>

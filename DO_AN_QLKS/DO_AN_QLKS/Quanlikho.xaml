@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="DO_AN_QLKS.Quanlikho"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0"
+            Orientation="Horizontal"
+            HorizontalAlignment="Right"
+            Margin="0,0,0,12">
+            <Button x:Name="btnImport" Content="Nhập kho" Padding="12,6"/>
+        </StackPanel>
+
+
+        <DataGrid Grid.Row="1" x:Name="dgInventory"
+                  AutoGenerateColumns="False" IsReadOnly="True"
+                  SelectionMode="Single" SelectionUnit="FullRow">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Mã hàng"     Binding="{Binding Code}"         Width="0.8*"/>
+                <DataGridTextColumn Header="Tên hàng"    Binding="{Binding Name}"         Width="1.6*"/>
+                <DataGridTextColumn Header="Danh mục"    Binding="{Binding Category}"     Width="1.2*"/>
+                <DataGridTextColumn Header="Đơn vị"      Binding="{Binding Unit}"         Width="0.8*"/>
+                <DataGridTextColumn Header="Tồn hiện tại"
+    Binding="{Binding OnHand, StringFormat={}{0:0.################}}"
+    Width="0.9*"/>
+                <DataGridCheckBoxColumn Header="Đang dùng" Binding="{Binding IsActive}"    Width="0.8*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8a5cdc4a9327491989ed83cd8fba10ea" Name="Diagram1">
+        <EntityTypeShape EntityType="DatabaseModel.DichVu" Width="1.5" PointX="8.25" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.HoaDon" Width="1.5" PointX="7.5" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.KhachHang" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.LoaiPhong" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.LuuTru" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.NguoiDung" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.PhieuNhap" Width="1.5" PointX="5.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.PhieuNhapChiTiet" Width="1.5" PointX="7.5" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.PhieuXuat" Width="1.5" PointX="5.25" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.PhieuXuatChiTiet" Width="1.5" PointX="7.5" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Phong" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.SuDungDichVu" Width="1.5" PointX="10.5" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.VaiTro" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.VatTu" Width="1.5" PointX="5.25" PointY="17.75" IsExpanded="true" />
+        <AssociationConnector Association="DatabaseModel.FK_SDDV_DichVu" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_HoaDon_LuuTru" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_LT_KhachHang" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_Phong_LoaiPhong" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_LT_NguoiDung" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_LT_Phong" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_SDDV_LuuTru" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_NguoiDung_VaiTro" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_PN_NguoiDung" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_PX_NguoiDung" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_PNCT_PN" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_PNCT_VT" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_PXCT_PX" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_PXCT_VT" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_SDDV_HoaDon" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

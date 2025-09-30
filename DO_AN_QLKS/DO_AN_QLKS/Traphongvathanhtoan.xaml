@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="DO_AN_QLKS.Traphongvathanhtoan"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Margin="12">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="360"/>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Header="Phòng đang được thuê" Grid.Column="0" Margin="0,0,12,0">
+            <DataGrid x:Name="dgOccupiedRooms"
+                      AutoGenerateColumns="False" IsReadOnly="True"
+                      SelectionMode="Single" SelectionUnit="FullRow"
+                      Margin="8">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Số phòng"   Binding="{Binding RoomNumber}"   Width="0.7*"/>
+                    <DataGridTextColumn Header="Khách"      Binding="{Binding CustomerName}" Width="1.2*"/>
+                    <DataGridTextColumn Header="Nhận phòng" Binding="{Binding CheckIn}"      Width="*"/>
+                    <DataGridTextColumn Header="Trả dự kiến" Binding="{Binding PlanCheckout}" Width="*"/>
+                    <DataGridTextColumn Header="Tạm tính"   Binding="{Binding EstimatedTotal}" Width="0.9*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+
+        <GroupBox Header="Thanh toán và Trả phòng" Grid.Column="1">
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"   />
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="110"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Phòng:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtRoom" Grid.Row="0" Grid.Column="1" IsReadOnly="True"/>
+
+                <TextBlock Text="Khách:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtGuest" Grid.Row="1" Grid.Column="1" IsReadOnly="True"/>
+
+                <TextBlock Text="Nhận phòng:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtCheckIn" Grid.Row="2" Grid.Column="1" IsReadOnly="True"/>
+
+                <TextBlock Text="Trả dự kiến:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtPlanCheckout" Grid.Row="3" Grid.Column="1" IsReadOnly="True"/>
+
+                <TextBlock Text="Tổng cần trả:" Grid.Row="4" Grid.Column="0"
+           VerticalAlignment="Center" FontWeight="Bold"/>
+
+                <DockPanel Grid.Row="4" Grid.Column="1">
+                    <Button x:Name="btnBillDetails" Content="Tính dịch vụ" Padding="8,4"
+            DockPanel.Dock="Right" Margin="8,0,0,0" Click="BtnBillDetails_Click"/>
+                    <TextBox x:Name="txtAmountDue" IsReadOnly="True" FontWeight="Bold"
+             TextAlignment="Right"/>
+                </DockPanel>
+
+
+                <TextBlock Text="Khách đưa:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtCashGiven" Grid.Row="5" Grid.Column="1" TextAlignment="Right"/>
+
+                <TextBlock Text="Tiền thừa:" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtChange" Grid.Row="6" Grid.Column="1" IsReadOnly="True" TextAlignment="Right"/>
+
+                <Button x:Name="btnConfirmPay"
+                        Grid.Row="8" Grid.ColumnSpan="2"
+                        Content="Xác nhận thanh toán" Padding="16,8"
+                        HorizontalAlignment="Right"/>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

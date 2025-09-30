@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="DO_AN_QLKS.Quanlihoadon"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <DataGrid x:Name="dgInvoices"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  SelectionUnit="FullRow">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Mã HĐ"        Binding="{Binding InvoiceCode}"   Width="0.8*"/>
+                <DataGridTextColumn Header="Khách hàng"   Binding="{Binding CustomerName}" Width="1.4*"/>
+                <DataGridTextColumn Header="Phòng"        Binding="{Binding RoomNumber}"   Width="0.7*"/>
+                <DataGridTextColumn Header="Ngày đến"     Binding="{Binding CheckIn}"      Width="1*"/>
+                <DataGridTextColumn Header="Ngày đi"      Binding="{Binding CheckOut}"     Width="1*"/>
+                <DataGridTextColumn Header="Tổng tiền"    Binding="{Binding Total}"        Width="1*"/>
+                <DataGridTextColumn Header="Phương thức"  Binding="{Binding PaymentMethod}" Width="1*"/>
+                <DataGridTextColumn Header="Trạng thái"   Binding="{Binding Status}"       Width="0.9*"/>
+                <DataGridTextColumn Header="Ngày tạo"     Binding="{Binding CreatedAt}"    Width="1*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
