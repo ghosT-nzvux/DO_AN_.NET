@@ -1,0 +1,256 @@
+-- 1) VaiTro
+CREATE TABLE [dbo].[VaiTro] (
+    [VaiTroId]  INT           IDENTITY (1, 1) NOT NULL,
+    [TenVaiTro] NVARCHAR (30) NOT NULL,
+    PRIMARY KEY CLUSTERED ([VaiTroId] ASC),
+    UNIQUE NONCLUSTERED ([TenVaiTro] ASC)
+);
+GO
+
+-- 2) NguoiDung (FK → VaiTro)
+CREATE TABLE [dbo].[NguoiDung] (
+    [NguoiDungId]     INT            IDENTITY (1, 1) NOT NULL,
+    [TenDangNhap]     NVARCHAR (50)  NOT NULL,
+    [MatKhauHash]     NVARCHAR (200) NOT NULL,
+    [MatKhauSalt]     NVARCHAR (200) NULL,
+    [HoTen]           NVARCHAR (100) NOT NULL,
+    [Email]           NVARCHAR (100) NULL,
+    [DienThoai]       NVARCHAR (20)  NULL,
+    [VaiTroId]        INT            NOT NULL,
+    [HoatDong]        BIT            DEFAULT ((1)) NOT NULL,
+    [TaoLuc]          DATETIME2 (0)  DEFAULT (sysdatetime()) NOT NULL,
+    [LanDangNhapCuoi] DATETIME2 (0)  NULL,
+    PRIMARY KEY CLUSTERED ([NguoiDungId] ASC),
+    UNIQUE NONCLUSTERED ([TenDangNhap] ASC),
+    CONSTRAINT [FK_NguoiDung_VaiTro] FOREIGN KEY ([VaiTroId]) REFERENCES [dbo].[VaiTro] ([VaiTroId])
+);
+GO
+CREATE NONCLUSTERED INDEX [IX_NguoiDung_TenDangNhap]
+    ON [dbo].[NguoiDung]([TenDangNhap] ASC);
+GO
+
+-- 3) KhachHang
+CREATE TABLE [dbo].[KhachHang] (
+    [KhachHangId] INT            IDENTITY (1, 1) NOT NULL,
+    [HoTen]       NVARCHAR (100) NOT NULL,
+    [DienThoai]   NVARCHAR (20)  NULL,
+    [Email]       NVARCHAR (100) NULL,
+    [CCCD]        NVARCHAR (20)  NULL,
+    [DiaChi]      NVARCHAR (200) NULL,
+    [GhiChu]      NVARCHAR (500) NULL,
+    [TaoLuc]      DATETIME2 (0)  DEFAULT (sysdatetime()) NOT NULL,
+    PRIMARY KEY CLUSTERED ([KhachHangId] ASC)
+);
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [UQ_KhachHang_DienThoai]
+    ON [dbo].[KhachHang]([DienThoai] ASC) WHERE ([DienThoai] IS NOT NULL);
+GO
+CREATE NONCLUSTERED INDEX [IX_KhachHang_TimKiem]
+    ON [dbo].[KhachHang]([HoTen] ASC, [CCCD] ASC);
+GO
+
+-- 4) LoaiPhong
+CREATE TABLE [dbo].[LoaiPhong] (
+    [LoaiPhongId]  INT            IDENTITY (1, 1) NOT NULL,
+    [TenLoai]      NVARCHAR (100) NOT NULL,
+    [MoTa]         NVARCHAR (300) NULL,
+    [GiaCoBan]     DECIMAL (18)   NOT NULL,
+    [SoNguoiToiDa] INT            DEFAULT ((2)) NOT NULL,
+    PRIMARY KEY CLUSTERED ([LoaiPhongId] ASC),
+    UNIQUE NONCLUSTERED ([TenLoai] ASC),
+    CONSTRAINT [CK_LoaiPhong_GiaCoBan] CHECK ([GiaCoBan]>=(0)),
+    CONSTRAINT [CK_LoaiPhong_SoNguoi] CHECK ([SoNguoiToiDa]>(0))
+);
+GO
+
+-- 5) Phong (FK → LoaiPhong)
+CREATE TABLE [dbo].[Phong] (
+    [PhongId]     INT            IDENTITY (1, 1) NOT NULL,
+    [SoPhong]     NVARCHAR (20)  NOT NULL,
+    [LoaiPhongId] INT            NOT NULL,
+    [TinhTrang]   NVARCHAR (20)  DEFAULT (N'Trong') NOT NULL,
+    [GhiChu]      NVARCHAR (300) NULL,
+    PRIMARY KEY CLUSTERED ([PhongId] ASC),
+    UNIQUE NONCLUSTERED ([SoPhong] ASC),
+    CONSTRAINT [FK_Phong_LoaiPhong] FOREIGN KEY ([LoaiPhongId]) REFERENCES [dbo].[LoaiPhong] ([LoaiPhongId]),
+    CONSTRAINT [CK_Phong_TinhTrang] CHECK ([TinhTrang]=N'BaoTri' OR [TinhTrang]=N'DangO' OR [TinhTrang]=N'DaDat' OR [TinhTrang]=N'Trong')
+);
+GO
+CREATE NONCLUSTERED INDEX [IX_Phong_LoaiPhong]
+    ON [dbo].[Phong]([LoaiPhongId] ASC, [TinhTrang] ASC);
+GO
+
+-- 6) DichVu
+CREATE TABLE [dbo].[DichVu] (
+    [DichVuId]   INT             IDENTITY (1, 1) NOT NULL,
+    [TenDichVu]  NVARCHAR (100)  NOT NULL,
+    [DonViTinh]  NVARCHAR (20)   NULL,
+    [GiaBan]     DECIMAL (18, 2) NOT NULL,
+    [LaVatTuKho] BIT             DEFAULT ((0)) NOT NULL,
+    [GhiChu]     NVARCHAR (300)  NULL,
+    [HieuLuc]    BIT             DEFAULT ((1)) NOT NULL,
+    PRIMARY KEY CLUSTERED ([DichVuId] ASC),
+    UNIQUE NONCLUSTERED ([TenDichVu] ASC),
+    CONSTRAINT [CK_DichVu_GiaBan] CHECK ([GiaBan]>=(0))
+);
+GO
+
+-- 7) VatTu
+CREATE TABLE [dbo].[VatTu] (
+    [VatTuId]    INT             IDENTITY (1, 1) NOT NULL,
+    [TenVatTu]   NVARCHAR (100)  NOT NULL,
+    [DonViTinh]  NVARCHAR (20)   NULL,
+    [SoLuongTon] DECIMAL (18, 3) DEFAULT ((0)) NOT NULL,
+    [GhiChu]     NVARCHAR (300)  NULL,
+    [HieuLuc]    BIT             DEFAULT ((1)) NOT NULL,
+    PRIMARY KEY CLUSTERED ([VatTuId] ASC),
+    UNIQUE NONCLUSTERED ([TenVatTu] ASC),
+    CONSTRAINT [CK_VatTu_SoLuongTon] CHECK ([SoLuongTon]>=(0))
+);
+GO
+
+-- 8) LuuTru (FK → Phong, KhachHang, NguoiDung)
+CREATE TABLE [dbo].[LuuTru] (
+    [LuuTruId]          INT             IDENTITY (1, 1) NOT NULL,
+    [PhongId]           INT             NOT NULL,
+    [KhachHangId]       INT             NOT NULL,
+    [CheckInDuKien]     DATETIME2 (0)   NOT NULL,
+    [CheckOutDuKien]    DATETIME2 (0)   NOT NULL,
+    [CheckInThucTe]     DATETIME2 (0)   NULL,
+    [CheckOutThucTe]    DATETIME2 (0)   NULL,
+    [SoNguoiLon]        INT             DEFAULT ((1)) NOT NULL,
+    [SoTreEm]           INT             DEFAULT ((0)) NOT NULL,
+    [TrangThai]         NVARCHAR (20)   DEFAULT (N'DaDat') NOT NULL,
+    [TienCoc]           DECIMAL (18, 2) DEFAULT ((0)) NOT NULL,
+    [GhiChu]            NVARCHAR (300)  NULL,
+    [TaoBoiNguoiDungId] INT             NULL,
+    [TaoLuc]            DATETIME2 (0)   DEFAULT (sysdatetime()) NOT NULL,
+    PRIMARY KEY CLUSTERED ([LuuTruId] ASC),
+    CONSTRAINT [FK_LT_Phong] FOREIGN KEY ([PhongId]) REFERENCES [dbo].[Phong] ([PhongId]),
+    CONSTRAINT [FK_LT_KhachHang] FOREIGN KEY ([KhachHangId]) REFERENCES [dbo].[KhachHang] ([KhachHangId]),
+    CONSTRAINT [FK_LT_NguoiDung] FOREIGN KEY ([TaoBoiNguoiDungId]) REFERENCES [dbo].[NguoiDung] ([NguoiDungId]),
+    CONSTRAINT [CK_LT_TrangThai] CHECK ([TrangThai]=N'Huy' OR [TrangThai]=N'DaTra' OR [TrangThai]=N'DaNhan' OR [TrangThai]=N'DaDat'),
+    CONSTRAINT [CK_LT_TienCoc] CHECK ([TienCoc]>=(0)),
+    CONSTRAINT [CK_LT_Ngay] CHECK ([CheckOutDuKien]>[CheckInDuKien])
+);
+GO
+CREATE NONCLUSTERED INDEX [IX_LuuTru_PhongNgay]
+    ON [dbo].[LuuTru]([PhongId] ASC, [CheckInDuKien] ASC, [CheckOutDuKien] ASC);
+GO
+CREATE NONCLUSTERED INDEX [IX_LuuTru_TrangThai]
+    ON [dbo].[LuuTru]([TrangThai] ASC);
+GO
+
+-- 9) PhieuNhap (FK → NguoiDung)
+CREATE TABLE [dbo].[PhieuNhap] (
+    [PhieuNhapId] INT            IDENTITY (1, 1) NOT NULL,
+    [NgayNhap]    DATETIME2 (0)  DEFAULT (sysdatetime()) NOT NULL,
+    [NguoiDungId] INT            NULL,
+    [GhiChu]      NVARCHAR (300) NULL,
+    PRIMARY KEY CLUSTERED ([PhieuNhapId] ASC),
+    CONSTRAINT [FK_PN_NguoiDung] FOREIGN KEY ([NguoiDungId]) REFERENCES [dbo].[NguoiDung] ([NguoiDungId])
+);
+GO
+
+-- 10) PhieuXuat (FK → NguoiDung)
+CREATE TABLE [dbo].[PhieuXuat] (
+    [PhieuXuatId] INT            IDENTITY (1, 1) NOT NULL,
+    [NgayXuat]    DATETIME2 (0)  DEFAULT (sysdatetime()) NOT NULL,
+    [LyDo]        NVARCHAR (200) NULL,
+    [NguoiDungId] INT            NULL,
+    [GhiChu]      NVARCHAR (300) NULL,
+    PRIMARY KEY CLUSTERED ([PhieuXuatId] ASC),
+    CONSTRAINT [FK_PX_NguoiDung] FOREIGN KEY ([NguoiDungId]) REFERENCES [dbo].[NguoiDung] ([NguoiDungId])
+);
+GO
+
+-- 11) PhieuNhapChiTiet (FK → PhieuNhap, VatTu)
+CREATE TABLE [dbo].[PhieuNhapChiTiet] (
+    [PhieuNhapChiTietId] INT             IDENTITY (1, 1) NOT NULL,
+    [PhieuNhapId]        INT             NOT NULL,
+    [VatTuId]            INT             NOT NULL,
+    [SoLuong]            DECIMAL (18, 3) NOT NULL,
+    [DonGia]             DECIMAL (18, 2) NOT NULL,
+    [ThanhTien]          AS              (CONVERT([decimal](18,2),[SoLuong]*[DonGia])) PERSISTED,
+    PRIMARY KEY CLUSTERED ([PhieuNhapChiTietId] ASC),
+    CONSTRAINT [FK_PNCT_PN] FOREIGN KEY ([PhieuNhapId]) REFERENCES [dbo].[PhieuNhap] ([PhieuNhapId]),
+    CONSTRAINT [FK_PNCT_VT] FOREIGN KEY ([VatTuId]) REFERENCES [dbo].[VatTu] ([VatTuId]),
+    CONSTRAINT [CK_PNCT_SoLuong] CHECK ([SoLuong]>(0)),
+    CONSTRAINT [CK_PNCT_DonGia] CHECK ([DonGia]>=(0))
+);
+GO
+CREATE NONCLUSTERED INDEX [IX_PNCT_PN]
+    ON [dbo].[PhieuNhapChiTiet]([PhieuNhapId] ASC);
+GO
+CREATE NONCLUSTERED INDEX [IX_PNCT_VT]
+    ON [dbo].[PhieuNhapChiTiet]([VatTuId] ASC);
+GO
+
+-- 12) PhieuXuatChiTiet (FK → PhieuXuat, VatTu)
+CREATE TABLE [dbo].[PhieuXuatChiTiet] (
+    [PhieuXuatChiTietId] INT             IDENTITY (1, 1) NOT NULL,
+    [PhieuXuatId]        INT             NOT NULL,
+    [VatTuId]            INT             NOT NULL,
+    [SoLuong]            DECIMAL (18, 3) NOT NULL,
+    [GhiChu]             NVARCHAR (200)  NULL,
+    PRIMARY KEY CLUSTERED ([PhieuXuatChiTietId] ASC),
+    CONSTRAINT [FK_PXCT_PX] FOREIGN KEY ([PhieuXuatId]) REFERENCES [dbo].[PhieuXuat] ([PhieuXuatId]),
+    CONSTRAINT [FK_PXCT_VT] FOREIGN KEY ([VatTuId]) REFERENCES [dbo].[VatTu] ([VatTuId]),
+    CONSTRAINT [CK_PXCT_SoLuong] CHECK ([SoLuong]>(0))
+);
+GO
+CREATE NONCLUSTERED INDEX [IX_PXCT_PX]
+    ON [dbo].[PhieuXuatChiTiet]([PhieuXuatId] ASC);
+GO
+CREATE NONCLUSTERED INDEX [IX_PXCT_VT]
+    ON [dbo].[PhieuXuatChiTiet]([VatTuId] ASC);
+GO
+
+-- 13) SuDungDichVu (FK → LuuTru, DichVu)
+CREATE TABLE [dbo].[SuDungDichVu] (
+    [SuDungDichVuId] INT             IDENTITY (1, 1) NOT NULL,
+    [LuuTruId]       INT             NOT NULL,
+    [DichVuId]       INT             NOT NULL,
+    [SoLuong]        DECIMAL (18, 3) DEFAULT ((1)) NOT NULL,
+    [DonGia]         DECIMAL (18, 2) NOT NULL,
+    [ThanhTien]      AS              (CONVERT([decimal](18,2),[SoLuong]*[DonGia])) PERSISTED,
+    [TaoLuc]         DATETIME2 (0)   DEFAULT (sysdatetime()) NOT NULL,
+    [GhiChu]         NVARCHAR (300)  NULL,
+    PRIMARY KEY CLUSTERED ([SuDungDichVuId] ASC),
+    CONSTRAINT [FK_SDDV_LuuTru] FOREIGN KEY ([LuuTruId]) REFERENCES [dbo].[LuuTru] ([LuuTruId]),
+    CONSTRAINT [FK_SDDV_DichVu] FOREIGN KEY ([DichVuId]) REFERENCES [dbo].[DichVu] ([DichVuId]),
+    CONSTRAINT [CK_SDDV_SoLuong] CHECK ([SoLuong]>(0)),
+    CONSTRAINT [CK_SDDV_DonGia] CHECK ([DonGia]>=(0))
+);
+GO
+CREATE NONCLUSTERED INDEX [IX_SDDV_LuuTru]
+    ON [dbo].[SuDungDichVu]([LuuTruId] ASC);
+GO
+CREATE NONCLUSTERED INDEX [IX_SDDV_DichVu]
+    ON [dbo].[SuDungDichVu]([DichVuId] ASC);
+GO
+
+-- 14) HoaDon (FK → LuuTru)
+CREATE TABLE [dbo].[HoaDon] (
+    [HoaDonId]          INT             IDENTITY (1, 1) NOT NULL,
+    [LuuTruId]          INT             NOT NULL,
+    [NgayLap]           DATETIME2 (0)   DEFAULT (sysdatetime()) NOT NULL,
+    [TienPhong]         DECIMAL (18, 2) DEFAULT ((0)) NOT NULL,
+    [TienDichVu]        DECIMAL (18, 2) DEFAULT ((0)) NOT NULL,
+    [GiamGia]           DECIMAL (18, 2) DEFAULT ((0)) NOT NULL,
+    [Thue]              DECIMAL (18, 2) DEFAULT ((0)) NOT NULL,
+    [TongTien]          AS              (CONVERT([decimal](18,2),(([TienPhong]+[TienDichVu])-[GiamGia])+[Thue])) PERSISTED,
+    [DaThanhToan]       BIT             DEFAULT ((0)) NOT NULL,
+    [HinhThucThanhToan] NVARCHAR (50)   NULL,
+    [GhiChu]            NVARCHAR (300)  NULL,
+    PRIMARY KEY CLUSTERED ([HoaDonId] ASC),
+    CONSTRAINT [FK_HoaDon_LuuTru] FOREIGN KEY ([LuuTruId]) REFERENCES [dbo].[LuuTru] ([LuuTruId]),
+    CONSTRAINT [CK_HD_SoTien] CHECK ([TienPhong]>=(0) AND [TienDichVu]>=(0) AND [GiamGia]>=(0) AND [Thue]>=(0))
+);
+GO
+CREATE NONCLUSTERED INDEX [IX_HoaDon_Ngay]
+    ON [dbo].[HoaDon]([NgayLap] ASC);
+GO
+CREATE NONCLUSTERED INDEX [IX_HoaDon_LuuTru]
+    ON [dbo].[HoaDon]([LuuTruId] ASC);
+GO
