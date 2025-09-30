@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Me</title>
+  <meta name="description" content="Portfolio cá nhân : Sinh viên DTU, Top 1 Sever, Đỉnh cao công nghệ." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- ====== Decorative background ====== -->
+  <div class="bg-blur"></div>
+  <div class="bg-grid"></div>
+
+  <!-- ====== Header / Navbar ====== -->
+  <header class="header" id="top">
+    <div class="container nav">
+      <a href="#hero" class="brand" aria-label="Trang chủ">About Me<span class="brand-dot">.</span></a>
+
+      <nav class="nav-links" aria-label="Chính">
+        <a href="#about">Về tôi</a>
+        <a href="#skills">Kỹ năng</a>
+        <a href="#projects">Dự án</a>
+        <a href="#experience">Kinh nghiệm</a>
+        <a href="#contact">Liên hệ</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn" aria-label="Đổi giao diện sáng/tối">
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8 1.42-1.42zm10.48 0l1.79-1.8 1.41 1.41-1.8 1.79-1.4-1.4zM12 4V1h0v3zm0 19v-3h0v3zM4 12H1v0h3zm22 0h-3v0h3zM6.76 19.16l-1.42 1.42-1.79-1.8 1.41-1.41 1.8 1.79zm12.48 0l1.4 1.4 1.8-1.79-1.41-1.41-1.79 1.8zM12 7a5 5 0 100 10 5 5 0 000-10z"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.354 15.354A9 9 0 1111.293 2.293a7 7 0 109.06 13.06z"/></svg>
+        </button>
+        <button id="menuToggle" class="hamburger" aria-label="Mở menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <nav class="nav-drawer" id="drawer" aria-label="Menu di động">
+      <a href="#about">Về tôi</a>
+      <a href="#skills">Kỹ năng</a>
+      <a href="#projects">Dự án</a>
+      <a href="#experience">Kinh nghiệm</a>
+      <a href="#contact">Liên hệ</a>
+    </nav>
+  </header>
+
+  <!-- ====== Hero ====== -->
+  <section id="hero" class="hero section">
+    <div class="container hero-inner">
+      <div class="hero-content" data-reveal="fade-up">
+        <p class="eyebrow">Xin chào 👋, tôi là</p>
+        <h1 class="hero-title">Vũ</h1>
+        <p class="hero-subtitle">
+          <span class="typed" id="typed">
+            <!-- Nội dung sẽ được thay bằng hiệu ứng gõ chữ -->
+          </span>
+        </p>
+        <p class="hero-desc">
+          Tester Leader từng dẫn dắt dự án BNPL & MiniApp tại Mcredit. Đam mê xây dựng công cụ trading realtime, tối ưu UI/UX và tự động hóa kiểm thử.
+        </p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#projects">Xem dự án</a>
+          <!-- TODO: thay link CV -->
+            <a class="btn btn-ghost" href="./index.html">Tải CV</a>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-number" data-counter="28">0</div>
+            <div class="stat-label">Dự án/Feature</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number" data-counter="7">0</div>
+            <div class="stat-label">Năm kinh nghiệm</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number" data-counter="12">0</div>
+            <div class="stat-label">Công cụ tự động</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual" data-reveal="fade-up" data-reveal-delay="120">
+        <!-- Avatar/Visual -->
+        <div class="avatar-wrap">
+          <div class="ring"></div>
+          <!-- TODO: thay ảnh của bạn (có thể để file local ./assets/avatar.jpg) -->
+          <img class="avatar" src="https://scontent.fdad7-2.fna.fbcdn.net/v/t39.30808-6/548206892_2194671047683757_7797078366135616536_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeGj66F4kQ_gpe6s2kXQ7djKmg-p8o13PyGaD6nyjXc_IV-MZP2RndEZK1xovJ06AoyncQ4_nczQHxWQd7KErC0Q&_nc_ohc=PcXYvXtVR-UQ7kNvwEcOM7f&_nc_oc=Adm-gTX1oFVibdMJoWMhsN5EKx0GkIB43E8Rn-PsAI5djC-tQLdta3EsNTgYgXcNwfs6hO2rVo5D7FrUXgP6k5xv&_nc_zt=23&_nc_ht=scontent.fdad7-2.fna&_nc_gid=VSy9YYz4I1AqPTzZkQh7Og&oh=00_Afbj3sCowdc3EfLwwqGuEChkGVnalllyrlc0WWtM_GEFoA&oe=68CF03AB" alt="Ảnh đại diện của Vũ" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== About ====== -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Về tôi</h2>
+        <p>Tư duy logic, nắm chắc nguyên lý phần mềm, tập trung vào chất lượng & tốc độ ra sản phẩm.</p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-card" data-tilt data-reveal="fade-up">
+          <h3>Tester Leader</h3>
+          <p>Quản lý team, review test case, viết test plan, báo cáo test report, phối hợp Dev/BA đảm bảo release an toàn.</p>
+        </div>
+        <div class="about-card" data-tilt data-reveal="fade-up" data-reveal-delay="80">
+          <h3>Automation & Tools</h3>
+          <p>Xây tool chart realtime, cảnh báo giọng nói, tổng hợp dữ liệu, rule-based signals; tối ưu thao tác và độ chính xác.</p>
+        </div>
+        <div class="about-card" data-tilt data-reveal="fade-up" data-reveal-delay="160">
+          <h3>Giao tiếp & Mentor</h3>
+          <p>Mentor thành viên mới, chuẩn hóa checklist kiểm thử, chia sẻ best practices & review chéo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== Skills ====== -->
+  <section id="skills" class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Kỹ năng</h2>
+        <p>Stack sử dụng thường xuyên cho testing, web, và phân tích dữ liệu.</p>
+      </div>
+
+      <ul class="chips" data-reveal="fade-up">
+        <!-- TODO: thay/điền kỹ năng của bạn -->
+        <li>Test Plan</li><li>Test Case Design</li><li>API Testing</li><li>Postman</li>
+        <li>JMeter</li><li>Selenium</li><li>JavaScript</li><li>TypeScript</li>
+        <li>HTML/CSS</li><li>Node.js</li><li>SQL</li><li>Git/GitHub</li>
+        <li>CI/CD</li><li>Agile/Scrum</li><li>TradingView/TA</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ====== Projects ====== -->
+  <section id="projects" class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Dự án nổi bật</h2>
+        <p>Một số công việc & side project tiêu biểu.</p>
+      </div>
+
+      <div class="projects-grid">
+        <!-- Project Card 1 -->
+        <article class="project-card" data-tilt data-reveal="fade-up">
+          <div class="project-media">
+            <!-- TODO: thay ảnh preview -->
+            <img class="avatar" src="https://bcp.cdnchinhphu.vn/Uploaded_VGP/buikieulien/20200120/CNTT.jpg" alt="Ảnh đại diện của Vũ" />          </div>
+          <div class="project-body">
+            <h3>BNPL MiniApp</h3>
+            <p>Kiểm thử end-to-end quy trình BNPL (thu thập dữ liệu, kiểm tra hợp lệ, giải ngân; quản lý & thanh toán khoản vay).</p>
+            <div class="tags"><span>Tester Lead</span><span>API</span><span>Automation</span></div>
+            <div class="project-cta">
+              <!-- TODO: thay link demo/source nếu có -->
+              <a class="btn btn-ghost" href="#" aria-disabled="true">Demo</a>
+              <a class="btn btn-primary" href="#" aria-disabled="true">Source</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project Card 2 -->
+        <article class="project-card" data-tilt data-reveal="fade-up" data-reveal-delay="80">
+          <div class="project-media">
+            <img class="avatar" src="https://tncglobal.vn/wp-content/uploads/2023/08/011220212-1.jpg" />     </div>
+          <div class="project-body">
+            <h3>Tool Chart Realtime</h3>
+            <p>Vẽ nến realtime, rule-based signals, đọc kết quả bằng giọng nói 5 giây/lần, export/import dữ liệu.</p>
+            <div class="tags"><span>JavaScript</span><span>WebSpeech</span><span>UI/UX</span></div>
+            <div class="project-cta">
+              <a class="btn btn-ghost" href="#" aria-disabled="true">Demo</a>
+              <a class="btn btn-primary" href="#" aria-disabled="true">Source</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project Card 3 -->
+        <article class="project-card" data-tilt data-reveal="fade-up" data-reveal-delay="160">
+          <div class="project-media">
+            <img class="avatar" src="https://congnghevadoisong.vn/thumb_x800x600/upload/2020/05/26/tuonglaiphattrien2.png" alt="Ảnh đại diện của Vũ" />          </div>
+          <div class="project-body">
+            <h3>QA Dashboard</h3>
+            <p>Dashboard theo dõi defect trend, coverage, hiệu quả test case; cảnh báo chất lượng theo release.</p>
+            <div class="tags"><span>Node.js</span><span>SQL</span><span>DataViz</span></div>
+            <div class="project-cta">
+              <a class="btn btn-ghost" href="#" aria-disabled="true">Demo</a>
+              <a class="btn btn-primary" href="#" aria-disabled="true">Source</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== Experience / Timeline ====== -->
+  <section id="experience" class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Kinh nghiệm</h2>
+        <p>Hành trình làm việc và những cột mốc nổi bật.</p>
+      </div>
+
+      <div class="timeline">
+        <div class="t-item" data-reveal="fade-up">
+          <div class="t-dot"></div>
+          <div class="t-content">
+            <div class="t-meta">2023 — 2025 · Mcredit</div>
+            <h3>Tester Leader</h3>
+            <p>Dẫn dắt kiểm thử BNPL & MiniApp, chuẩn hóa process, cải thiện tốc độ release & chất lượng.</p>
+          </div>
+        </div>
+
+        <div class="t-item" data-reveal="fade-up" data-reveal-delay="80">
+          <div class="t-dot"></div>
+          <div class="t-content">
+            <div class="t-meta">2020 — 2023</div>
+            <h3>QA/Automation</h3>
+            <p>Xây dựng nền tảng automation test, tích hợp CI/CD, giảm lỗi lặp & tăng coverage.</p>
+          </div>
+        </div>
+
+        <div class="t-item" data-reveal="fade-up" data-reveal-delay="160">
+          <div class="t-dot"></div>
+          <div class="t-content">
+            <div class="t-meta">2016 — 2020</div>
+            <h3>Tester/BA support</h3>
+            <p>Thiết kế test case, hỗ trợ phân tích nghiệp vụ, phối hợp Dev xử lý lỗi nhanh chóng.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== Contact ====== -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Liên hệ</h2>
+        <p>Mở lòng với cơ hội mới: cộng tác dự án, tư vấn QA, tối ưu sản phẩm.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card" data-reveal="fade-up">
+          <h3>Thông tin</h3>
+          <ul class="contact-list">
+            <!-- TODO: thay email/điện thoại/link -->
+            <li><strong>Email:</strong> <a href="mailto:ntvu2803@gamil.com">ntvu2803@gamil.com</a> <button class="chip-action" data-copy="ntvu2803@gamil.com">Copy</button></li>
+            <li><strong>Phone/Zalo:</strong> <a href="tel:+84349320542">+84 349 320 542</a> <button class="chip-action" data-copy="+84901234567">Copy</button></li>
+            <li><strong>GitHub:</strong> <a href="#" target="_blank" rel="noopener">github.com/vu</a></li>
+            <li><strong>Facebook:</strong> <a href="https://www.facebook.com/nguyentruong.vu04/">https://www.facebook.com/nguyentruong.vu04/</a> </li>
+          </ul>
+        </div>
+
+        <form class="contact-form" data-reveal="fade-up" data-reveal-delay="120" onsubmit="return submitContact(event)">
+          <div class="form-row">
+            <label for="name">Họ & tên</label>
+            <input id="name" name="name" type="text" placeholder="Nguyễn Văn A" required>
+          </div>
+          <div class="form-row">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="ban@congty.com" required>
+          </div>
+          <div class="form-row">
+            <label for="message">Lời nhắn</label>
+            <textarea id="message" name="message" rows="5" placeholder="Chào Vũ, chúng tôi muốn hợp tác..." required></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit">Gửi lời nhắn</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="#top" class="backtop" aria-label="Lên đầu trang">▲</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
